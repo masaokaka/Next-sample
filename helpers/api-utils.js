@@ -38,30 +38,41 @@ export const getFilteredEvents = async (dateFilter) => {
 };
 
 export const emailRegistration = (enteredEmail) => {
-  fetch("/api/newsletter", {
+  return fetch("/api/newsletter", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email: enteredEmail }),
   })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data.message);
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error(response.json().messgae || "something went wrong");
+      }
+    })
+    .catch((error) => {
+      throw new Error(error.message);
     });
 };
 
 export const postComment = (data, eventId) => {
-  fetch(`/api/comments/${eventId}`, {
+  return fetch(`/api/comments/${eventId}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
   })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data.message);
-      console.log(data.comment);
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error(response.json().messgae || "something went wrong");
+      }
+    })
+    .catch((error) => {
+      throw new Error(error.message);
     });
 };
