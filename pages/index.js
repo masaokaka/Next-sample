@@ -1,6 +1,7 @@
 import EventList from "../components/events/event-list";
 import { getFeaturedEvents } from "../helpers/api-utils";
 import Head from "next/head";
+import NewsletterRegistration from "../components/input/newsletter-registration";
 
 const HomePage = (props) => {
   return (
@@ -10,6 +11,7 @@ const HomePage = (props) => {
         {/* Googleとかで検索した時に検索結果ページに表示される文章が以下のmetaタグのcontentになる */}
         <meta name="description" content="Find a lot of great events" />
       </Head>
+      <NewsletterRegistration />
       <EventList items={props.events} />
     </div>
   );

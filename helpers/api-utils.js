@@ -36,3 +36,32 @@ export const getFilteredEvents = async (dateFilter) => {
 
   return filteredEvents;
 };
+
+export const emailRegistration = (enteredEmail) => {
+  fetch("/api/newsletter", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email: enteredEmail }),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data.message);
+    });
+};
+
+export const postComment = (data, eventId) => {
+  fetch(`/api/comments/${eventId}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data.message);
+      console.log(data.comment);
+    });
+};
